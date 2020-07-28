@@ -91,7 +91,7 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-# Complete the implementation of the shortest_path function such that it returns the shortest path from the person with id source to the person with the id target.
+# sinfait canvis aqui que pasa sw boComplete the implementation of the shortest_path function such that it returns the shortest path from the person with id source to the person with the id target.
 
 # Assuming there is a path from the source to the target, your function should return a list, where each list item is the next (movie_id, person_id) pair in the path from the source to the target. Each pair should be a tuple of two ints.
 # For example, if the return value of shortest_path were [(1, 2), (3, 4)], that would mean that the source starred in movie 1 with person 2, person 2 starred in movie 3 with person 4, and person 4 is the target.
