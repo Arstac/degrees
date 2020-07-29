@@ -97,7 +97,6 @@ def shortest_path(source, target):
     frontier.add(start)
 
     explored= set()
-    print("executo while true")
     #executa el loop fins que es trobi una solucio
     while True:
         if frontier.empty():
@@ -107,20 +106,16 @@ def shortest_path(source, target):
         print (node)
         #comprovem si es el node solucio
         if node.state == target:
-        	print("trobo solucio")
-        	actions= []
-        	cells =[]
+            actions= []
+            cells =[]
             solution= []
-        	while node.parent is not None:
-        		actions.append(node.action)
-        		cells.append(node.state)
-        		solution.append(neighbors_for_person(node.state))
-        		node = node.parent
-        	actions.reverse()
-        	cells.reverse()
-        	solution.reverse()
-        	return solution
-        	
+
+            while node.parent is not None:
+                solution.append((node.action,node.state))
+                node = node.parent
+            solution.reverse()
+            print (solution)
+            return solution
         #marco el node com explorat
         explored.add(node.state)
         print(node.state)
@@ -132,6 +127,9 @@ def shortest_path(source, target):
           if state not in explored and not frontier.contains_state(state):
              child = Node(state=state, parent=node, action=action)
              frontier.add(child)
+
+
+             
 def person_id_for_name(name):
     """
     Returns the IMDB id for a person's name,
