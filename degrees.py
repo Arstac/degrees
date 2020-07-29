@@ -17,7 +17,7 @@ def load_data(directory):
     Load data from CSV files into memory.
     """
     # Load people
-    with open(f"small/people.csv", encoding="utf-8") as f:
+    with open(f"{directory}/people.csv", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             people[row["id"]] = {
@@ -54,8 +54,8 @@ def load_data(directory):
 def main():
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
-    directory = sys.argv[1] if len(sys.argv) == 2 else "large"
-
+    #directory = sys.argv[1] if len(sys.argv) == 2 else "large"
+    directory="small"
     # Load data from files into memory
     print("Loading data...")
     load_data(directory)
@@ -100,7 +100,7 @@ def shortest_path(source, target):
     #executa el loop fins que es trobi una solucio
     while True:
         if frontier.empty():
-            raise Exception("No solution")
+            return None
         #agafem un node de la frontier
         node = frontier.remove()
         print (node)
@@ -116,7 +116,6 @@ def shortest_path(source, target):
             return solution
         #marco el node com explorat
         explored.add(node.state)
-        print(node.state)
         
         #afegeixo els nodes veins a la frontier
         for action, state in neighbors_for_person(node.state):
