@@ -106,8 +106,6 @@ def shortest_path(source, target):
         print (node)
         #comprovem si es el node solucio
         if node.state == target:
-            actions= []
-            cells =[]
             solution= []
 
             while node.parent is not None:
@@ -120,16 +118,14 @@ def shortest_path(source, target):
         explored.add(node.state)
         print(node.state)
         
-        #afegeixo els nodes veins a
-        neighbors = neighbors_for_person(node.state)
-        print (neighbors)
-        for action, state in neighbors:
+        #afegeixo els nodes veins a la frontier
+        for action, state in neighbors_for_person(node.state):
           if state not in explored and not frontier.contains_state(state):
              child = Node(state=state, parent=node, action=action)
              frontier.add(child)
 
 
-             
+
 def person_id_for_name(name):
     """
     Returns the IMDB id for a person's name,
