@@ -90,7 +90,7 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-    #l'estat inicial es de la persona en questio, les pelicules que ha fet i amb qui ha coincidit.
+    #l'estat inicial es de la persona en questio, les pelicules que ha fet i amb qui ha coincidit. iiii
     start = Node(state=neighbors_for_person(person_id_for_name(source)), parent=None, action=None)
     #creo la cua FIFO
     frontier = QueueFrontier()
