@@ -17,7 +17,7 @@ def load_data(directory):
     Load data from CSV files into memory.
     """
     # Load people
-    with open(f"{directory}/people.csv", encoding="utf-8") as f:
+    with open(f"small/people.csv", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             people[row["id"]] = {
@@ -80,9 +80,8 @@ def main():
             person1 = people[path[i][1]]["name"]
             person2 = people[path[i + 1][1]]["name"]
             movie = movies[path[i + 1][0]]["title"]
-            print(f"{i + 1}: {person1} and {person2} starred in {movie}")
-
-
+            print(f"{i + 1}: {person1} and {person2} starred in {movie}")                 
+                    
 def shortest_path(source, target):
     """
     Returns the shortest list of (movie_id, person_id) pairs
@@ -91,21 +90,43 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
     #l'estat inicial es de la persona en questio, les pelicules que ha fet i amb qui ha coincidit. iiii
-    start = Node(state=neighbors_for_person(person_id_for_name(source)), parent=None, action=None)
+    start = Node(state=source, parent=None, action=None)
     #creo la cua FIFO
     frontier = QueueFrontier()
     #afegeixo el node inicial a la frontier.
     frontier.add(start)
 
     explored= set()
-
+    print("executo while true")
     #executa el loop fins que es trobi una solucio
     while True:
         if frontier.empty():
             raise Exception("No solution")
- 
-
-    raise NotImplementedError
+        #agafem un node de la frontier
+        node = frontier.remove()
+        #comprovem si es el node solucio
+        if node.state == target:
+        	print("trobo solucio")
+        	actions = []
+        	cells =[]
+        	while node.parent is not None:
+        		actions.append(node.action)
+        		cells.append(node.state)
+        		solution.append(neighbors_for_person(person_id_for_name(node.state)))
+        		node = node.parent
+        	actions.reverse()
+        	cells.reverse()
+        	solution.reverse()
+        	return solution
+        	
+        #marco el node com explorat
+        explored.add(node.state)
+        
+        #afegeixo els nodes veins a
+        for action, state in neighbors_for_person(person_id_for_name(node.state)):
+          if state not in explored and not frontier.contains_state(state):
+             child = Node(state=state, parent=node, action=action)
+             frontier.add(child)
 
 
 def person_id_for_name(name):
